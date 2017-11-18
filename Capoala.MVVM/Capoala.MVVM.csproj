@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net47;net462</TargetFrameworks>
+    <Version>2017.1.1.1</Version>
+    <Description>A featherlight MVVM framework.</Description>
+    <Copyright>Jonathan Nash</Copyright>
+    <PackageReleaseNotes>Provides default implementations of the INotifyPropertyChanged interface.
+
+Provides default implementations of the ICommand interface.
+
+Provides default implementations of a navigation service.</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Capoala</Company>
+    <Authors>Jonathan Nash</Authors>
+    <PackageTags>capoala nash mvvm ICommand RelayCommand relay-command INotifyPropertyChanged</PackageTags>
+    <AssemblyVersion>2017.1.1.1</AssemblyVersion>
+    <FileVersion>2017.1.1.1</FileVersion>
+    <PackageLicenseUrl>https://github.com/Capoala/Capoala.MVVM/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Capoala/Capoala.MVVM</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Capoala.MVVM.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
