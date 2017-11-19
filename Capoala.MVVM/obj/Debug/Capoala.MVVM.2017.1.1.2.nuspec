@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Capoala.MVVM</id>
+    <version>2017.1.1.2</version>
+    <authors>Jonathan Nash</authors>
+    <owners>Jonathan Nash</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/Capoala/Capoala.MVVM/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Capoala/Capoala.MVVM</projectUrl>
+    <description>A featherlight MVVM framework.</description>
+    <releaseNotes>Provides default implementations of the INotifyPropertyChanged interface.
+
+Provides default implementations of the ICommand interface.
+
+Provides default implementations of a navigation service.</releaseNotes>
+    <copyright>Jonathan Nash</copyright>
+    <tags>capoala nash mvvm ICommand RelayCommand relay-command INotifyPropertyChanged</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7" />
+      <group targetFramework=".NETFramework4.6.2" />
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\bin\Debug\net462\Capoala.MVVM.dll" target="lib\net462\Capoala.MVVM.dll" />
+    <file src="C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\bin\Debug\net47\Capoala.MVVM.dll" target="lib\net47\Capoala.MVVM.dll" />
+    <file src="C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\bin\Debug\netstandard2.0\Capoala.MVVM.dll" target="lib\netstandard2.0\Capoala.MVVM.dll" />
+  </files>
+</package>

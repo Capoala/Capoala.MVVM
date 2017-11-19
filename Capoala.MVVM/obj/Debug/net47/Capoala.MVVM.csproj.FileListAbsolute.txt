@@ -1,0 +1,7 @@
+C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\bin\Debug\net47\Capoala.MVVM.dll
+C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\bin\Debug\net47\Capoala.MVVM.pdb
+C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\net47\Capoala.MVVM.csproj.CoreCompileInputs.cache
+C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\net47\Capoala.MVVM.AssemblyInfoInputs.cache
+C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\net47\Capoala.MVVM.AssemblyInfo.cs
+C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\net47\Capoala.MVVM.dll
+C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\net47\Capoala.MVVM.pdb

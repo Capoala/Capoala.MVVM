@@ -28,9 +28,9 @@ namespace Capoala.MVVM
         /// <param name="property">The property reference to set the value of.</param>
         /// <param name="value">The value to set the proeprty to.</param>
         /// <param name="caller">The property name.</param>
-        public virtual void SetAndNotify(ref object property, object value, [CallerMemberName] string caller = null)
+        public virtual void SetAndNotify<TProperty>(ref TProperty property, object value, [CallerMemberName] string caller = null)
         {
-            property = value;
+            property = (TProperty)value;
             Notify(caller);
         }
     }
