@@ -1,9 +1,0 @@
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\bin\Debug\netstandard2.0\Capoala.MVVM.deps.json
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\bin\Debug\netstandard2.0\Capoala.MVVM.dll
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\bin\Debug\netstandard2.0\Capoala.MVVM.pdb
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\netstandard2.0\Capoala.MVVM.csprojResolveAssemblyReference.cache
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\netstandard2.0\Capoala.MVVM.csproj.CoreCompileInputs.cache
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\netstandard2.0\Capoala.MVVM.AssemblyInfoInputs.cache
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\netstandard2.0\Capoala.MVVM.AssemblyInfo.cs
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\netstandard2.0\Capoala.MVVM.dll
-C:\Dev\VS\Projects\Capoala.MVVM\Capoala.MVVM\obj\Debug\netstandard2.0\Capoala.MVVM.pdb
