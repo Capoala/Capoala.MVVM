@@ -1,0 +1,17 @@
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF Test.csprojResolveAssemblyReference.cache
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\MainWindow.g.cs
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\App.g.cs
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF Test_MarkupCompile.cache
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF Test_MarkupCompile.lref
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF Test.exe
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF Test.pdb
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\bin\Release\WPF Test.exe.config
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\bin\Release\WPF Test.exe
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\bin\Release\WPF Test.pdb
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\bin\Release\Capoala.MVVM.dll
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\MainWindow.baml
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF Test.g.resources
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF_Test.Properties.Resources.resources
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF Test.csproj.GenerateResource.Cache
+C:\Dev\VS\Projects\Capoala.MVVM\WPF Test\obj\Release\WPF Test.csproj.CoreCompileInputs.cache

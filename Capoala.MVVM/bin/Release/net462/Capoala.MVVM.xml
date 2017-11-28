@@ -124,13 +124,18 @@
             </summary>
             <param name="caller">The property name.</param>
         </member>
-        <member name="M:Capoala.MVVM.NotifyingObjectBaseSlim.SetAndNotify``1(``0@,System.Object,System.String)">
+        <member name="M:Capoala.MVVM.NotifyingObjectBaseSlim.SetAndNotify``1(``0@,``0,System.Collections.Generic.EqualityComparer{``0},System.String)">
             <summary>
             Sets the referenced property to the given value and then raised the <see cref="E:Capoala.MVVM.NotifyingObjectBaseSlim.PropertyChanged"/> event.
             </summary>
             <param name="property">The property reference to set the value of.</param>
             <param name="value">The value to set the proeprty to.</param>
+            <param name="equalityComparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use.</param>
             <param name="caller">The property name.</param>
+            <returns>
+            Returns true if the property value was udpated, meaning the new value was not equal to the current value.
+            Returns false otherwise.
+            </returns>
         </member>
         <member name="T:Capoala.MVVM.NotifyingObjectBase">
             <summary>
@@ -182,13 +187,18 @@
             </summary>
             <param name="caller">The property name.</param>
         </member>
-        <member name="M:Capoala.MVVM.NotifyingObjectBase.Set``1(``0,System.String)">
+        <member name="M:Capoala.MVVM.NotifyingObjectBase.Set``1(``0,System.Collections.Generic.EqualityComparer{``0},System.String)">
             <summary>
             Sets the value of the specified property and raises a property changed event.
             </summary>
             <typeparam name="TValue">The type of object to store.</typeparam>
             <param name="value">The value.</param>
+            <param name="equalityComparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use.</param>
             <param name="propertyName">The property name.</param>
+            <returns>
+            Returns true if the property value was udpated, meaning the new value was not equal to the current value.
+            Returns false otherwise.
+            </returns>
         </member>
         <member name="M:Capoala.MVVM.NotifyingObjectBase.Get``1(System.String)">
             <summary>

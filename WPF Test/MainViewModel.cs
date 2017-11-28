@@ -6,37 +6,48 @@ namespace WPF_Test
     //public class ViewModel : Capoala.MVVM.NotifyingObjectBaseSlim
     //{
     //    string _name = null;
-    //    public string Name { get => _name; set => SetAndNotify(ref _name, value); }
-    //}
-
-    //public class ViewModel : Capoala.MVVM.NotifyingObjectBaseSlim
-    //{
-    //    string _firstName = null;
-    //    public string FirstName
+    //    public string Name
     //    {
-    //        get => _firstName;
+    //        get => _name;
     //        set
     //        {
-    //            _firstName = value;
-    //            Notify();
-    //            Notify(nameof(FullName));
+    //            if (SetAndNotify(ref _name, value))
+    //            {
+    //                DW.WriteLine(value);
+    //                Notify(nameof(NickName));
+    //            }
     //        }
     //    }
 
-    //    string _lastName = null;
-    //    public string LastName
-    //    {
-    //        get => _lastName;
-    //        set
-    //        {
-    //            _lastName = value;
-    //            Notify();
-    //            Notify(nameof(FullName));
-    //        }
-    //    }
-
-    //    public string FullName => $"{FirstName} {LastName}";
+    //    public string NickName => Name;
     //}
+
+    public class ViewModel : Capoala.MVVM.NotifyingObjectBaseSlim
+    {
+        string _firstName = null;
+        public string FirstName
+        {
+            get => _firstName;
+            set
+            {
+                if (SetAndNotify(ref _firstName, value))
+                    Notify(nameof(FullName));
+            }
+        }
+
+        string _lastName = null;
+        public string LastName
+        {
+            get => _lastName;
+            set
+            {
+                if (SetAndNotify(ref _lastName, value))
+                    Notify(nameof(FullName));
+            }
+        }
+
+        public string FullName => $"{FirstName} {LastName}";
+    }
 
     //public class ViewModel : Capoala.MVVM.NotifyingObjectBase
     //{

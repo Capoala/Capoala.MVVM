@@ -27,11 +27,24 @@ namespace Capoala.MVVM
         /// </summary>
         /// <param name="property">The property reference to set the value of.</param>
         /// <param name="value">The value to set the proeprty to.</param>
+        /// <param name="equalityComparer">The <see cref="IEqualityComparer{T}"/> implementation to use.</param>
         /// <param name="caller">The property name.</param>
-        public virtual void SetAndNotify<TProperty>(ref TProperty property, object value, [CallerMemberName] string caller = null)
+        /// <returns>
+        /// Returns true if the property value was udpated, meaning the new value was not equal to the current value.
+        /// Returns false otherwise.
+        /// </returns>
+        public virtual bool SetAndNotify<TProperty>(ref TProperty property, TProperty value, EqualityComparer<TProperty> equalityComparer = null, [CallerMemberName] string caller = null)
         {
-            property = (TProperty)value;
-            Notify(caller);
+            if (!equalityComparer?.Equals(value, property) ?? !EqualityComparer<TProperty>.Default.Equals(value, property))
+            {
+                property = value;
+                Notify(caller);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 
@@ -124,13 +137,23 @@ namespace Capoala.MVVM
         /// </summary>
         /// <typeparam name="TValue">The type of object to store.</typeparam>
         /// <param name="value">The value.</param>
+        /// <param name="equalityComparer">The <see cref="IEqualityComparer{T}"/> implementation to use.</param>
         /// <param name="propertyName">The property name.</param>
-        public virtual void Set<TValue>(TValue value, [CallerMemberName] string propertyName = null)
+        /// <returns>
+        /// Returns true if the property value was udpated, meaning the new value was not equal to the current value.
+        /// Returns false otherwise.
+        /// </returns>
+        public virtual bool Set<TValue>(TValue value, EqualityComparer<TValue> equalityComparer = null, [CallerMemberName] string propertyName = null)
         {
-            if (!EqualityComparer<TValue>.Default.Equals(value, Get<TValue>(propertyName)))
+            if (!equalityComparer?.Equals(value, Get<TValue>(propertyName)) ?? !EqualityComparer<TValue>.Default.Equals(value, Get<TValue>(propertyName)))
             {
                 _backingStore[propertyName] = value;
                 Notify(propertyName);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

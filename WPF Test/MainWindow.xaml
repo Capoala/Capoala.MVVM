@@ -20,14 +20,14 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="RecordID"/>
+            <TextBox x:Name="RecordID" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Column="1" 
                     Margin="10 0 0 0" 
                     Command="{Binding GetRecordCommand}" 
                     CommandParameter="{Binding ElementName=RecordID, Path=Text}">Retreive</Button>
         </Grid>
         <Grid Grid.Row="1" Margin="0 20 0 0">
-            <!--Content-->
+            <TextBlock Text="{Binding NickName, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
         <Grid Grid.Row="2" Margin="0 20 0 0">
             <Button HorizontalAlignment="Right" 
