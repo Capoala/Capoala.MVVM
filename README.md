@@ -33,9 +33,8 @@ public class ViewModel : Capoala.MVVM.NotifyingObjectBaseSlim
         get => _lastName;
         set
         {
-            _lastName = value;
-            Notify();
-            Notify(nameof(FullName));
+            if (SetAndNotify(ref _lastName, value))
+                Notify(nameof(FullName));
         }
     }
 
