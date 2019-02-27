@@ -1,11 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net47;net462</TargetFrameworks>
-    <Version>2017.1.2.5</Version>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.2;netcoreapp2.1;net472;net471;net47</TargetFrameworks>
+    <Version>2019.0.0-alpha.1</Version>
     <Description>A featherweight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.</Description>
     <Copyright>Jonathan Nash</Copyright>
-    <PackageReleaseNotes>Release Notes 2017.1.2.4
+    <PackageReleaseNotes>Release Notes 2019
+
+- API Breaking - 
+
+- Updated framework support.
+- Updated attribute handling for cleaner code and higher performance. 
+- Updated attribute names for clarity.
+- Added new attribute for allowing the CommandRelay to subscribe to property changes to re-trigger the "CanExecute" evaluations.
+- Isolated classes to separate files.
+- Implemented a new abstraction pattern for navigation along with custom event arguments.
+- Added an intermediate base class for implementing the INotifyPropertyChanged interface. 
+
+Release Notes 2017.1.2.4
 The Set() and SetAndNotify() methods now return a boolean value for evaluating whether the property was set or not.
 The Set() and SetAndNotify() methods now allow for a different equality comparer to be used.
 
@@ -17,8 +29,8 @@ Provides default implementations of a navigation service.</PackageReleaseNotes>
     <Company>Jonathan Nash</Company>
     <Authors>Jonathan Nash</Authors>
     <PackageTags>capoala nash mvvm ICommand RelayCommand relay-command INotifyPropertyChanged</PackageTags>
-    <AssemblyVersion>2017.1.2.5</AssemblyVersion>
-    <FileVersion>2017.1.2.5</FileVersion>
+    <AssemblyVersion>2019.0.0.0</AssemblyVersion>
+    <FileVersion>2019.0.0.0</FileVersion>
     <PackageLicenseUrl>https://github.com/Capoala/Capoala.MVVM/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://capoala.github.io/Capoala.MVVM/</PackageProjectUrl>
   </PropertyGroup>
