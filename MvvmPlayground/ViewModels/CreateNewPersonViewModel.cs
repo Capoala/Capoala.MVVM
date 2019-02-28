@@ -16,7 +16,6 @@ namespace MvvmPlayground.ViewModels
         private bool _isOperationInProgress = false;
         private string _firstName;
         private string _lastName;
-        private string _middleName;
 
 
         /// <summary>
@@ -35,11 +34,6 @@ namespace MvvmPlayground.ViewModels
         public string LastName { get => _lastName; set => SetAndNotify(ref _lastName, value); }
 
         /// <summary>
-        /// The middle name of the person.
-        /// </summary>
-        public string MiddleName { get => _middleName; set => SetAndNotify(ref _middleName, value); }
-
-        /// <summary>
         /// The display name as presented on official documents.
         /// </summary>
         /// <remarks>
@@ -47,8 +41,14 @@ namespace MvvmPlayground.ViewModels
         /// This means that when <see cref="FirstName"/>, <see cref="MiddleName"/> or <see cref="LastName"/>
         /// changed, this property also notifies the owner that it has changed.
         /// </remarks>
-        [SubscribeToChanges(nameof(FirstName), nameof(MiddleName), nameof(LastName))]
-        public string DisplayName => $"{LastName}, {FirstName} {MiddleName?.FirstOrDefault()}".Trim();
+        [SubscribeToChanges(nameof(FirstName), nameof(LastName))]
+        public string DisplayName => string.IsNullOrEmpty(LastName) && string.IsNullOrEmpty(FirstName)
+            ? null
+            : string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(FirstName) 
+            ? $"{FirstName}"
+            : !string.IsNullOrEmpty(LastName) && string.IsNullOrEmpty(FirstName)
+            ? $"{LastName}"
+            : $"{LastName}, {FirstName}";
 
 
         /// <summary>
@@ -63,16 +63,22 @@ namespace MvvmPlayground.ViewModels
         [SubscribeToChanges(nameof(FirstName), nameof(LastName), nameof(IsOperationInProgress))]
         public CommandRelay CreateCommand { get; }
 
+        /// <summary>
+        /// Cancels the operation by going back to the previous page.
+        /// </summary>
+        public CommandRelay CancelCommand { get; } = new CommandRelay(() => System.Diagnostics.Debug.WriteLine(Services.MainNavigationService.Service.TryGoBack()));
 
         /// <summary>
         /// Creates a new <see cref="CreateNewPersonViewModel"/> instance.
         /// </summary>
-        internal CreateNewPersonViewModel() => CreateCommand = new Capoala.MVVM.CommandRelay(() =>
+        public CreateNewPersonViewModel() => CreateCommand = new Capoala.MVVM.CommandRelay(() =>
         {
             // This is the work that will be done when called.
             IsOperationInProgress = true;
+            SharedState.SharedData.People.Add(new Models.Person() { FirstName = FirstName, LastName = LastName });
             MessageBox.Show($"{FirstName} {LastName} has been created!", DisplayName, MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             IsOperationInProgress = false;
+            Services.MainNavigationService.Service.NavigateTo(SharedState.SharedData.ViewModels.GetPersonListingViewModel.Value);
 
             // We'll add the logic for determining whether the command is enabled or not. 
             // Notice we use the same property names with the attribute for this property.

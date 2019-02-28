@@ -37,7 +37,8 @@ namespace Capoala.MVVM
 
         public void NavigateTo(TNavigationItem navigationItem)
         {
-            BackNavigationStack.Push(navigationItem);
+            if (CurrentNavigationItem != null)
+                BackNavigationStack.Push(CurrentNavigationItem);
             CurrentNavigationItem = navigationItem;
             NavigationDidHappen?.Invoke(this, new NavigationChangedEventArgs<TNavigationItem>(navigationItem));
         }
