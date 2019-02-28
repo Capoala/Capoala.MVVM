@@ -5,7 +5,13 @@
     <Version>2019.0.0-alpha.2</Version>
     <Description>A featherweight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.</Description>
     <Copyright>Jonathan Nash</Copyright>
-    <PackageReleaseNotes>Release Notes 2019
+    <PackageReleaseNotes>Release Notes 2019 (alpha 2)
+
+- BUG: Corrected issue with the navigation pushing the request object onto the "Back" stack instead of pushing the current object. This resulted in the item being navigated to to also be the previous item.
+
+- NEW: Added a default class for abstract implementation for the MvvmNavigatorBase.
+
+Release Notes 2019 (alpha 1)
 
 - API Breaking - 
 
