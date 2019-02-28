@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.2;netcoreapp2.1;net472;net471;net47</TargetFrameworks>
-    <Version>2019.0.0-alpha.1</Version>
+    <Version>2019.0.0-alpha.2</Version>
     <Description>A featherweight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.</Description>
     <Copyright>Jonathan Nash</Copyright>
     <PackageReleaseNotes>Release Notes 2019
