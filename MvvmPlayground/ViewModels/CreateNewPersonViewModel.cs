@@ -60,18 +60,18 @@ namespace MvvmPlayground.ViewModels
         /// <see cref="IsOperationInProgress"/> changes, the method <see cref="CommandRelay.NotifyCanExecuteDidChange"/>
         /// is executed for this property.
         /// </remarks>
-        [SubscribeToChanges(nameof(FirstName), nameof(LastName), nameof(IsOperationInProgress))]
-        public CommandRelay CreateCommand { get; }
+        [RequeryCanExecuteChangedOnPropertyChange(nameof(FirstName), nameof(LastName), nameof(IsOperationInProgress))]
+        public CommandRelay<object> CreateCommand { get; }
 
         /// <summary>
         /// Cancels the operation by going back to the previous page.
         /// </summary>
-        public CommandRelay CancelCommand { get; } = new CommandRelay(() => System.Diagnostics.Debug.WriteLine(Services.MainNavigationService.Service.TryGoBack()));
+        public CommandRelay CancelCommand { get; } = new CommandRelay(() => Services.MainNavigationService.Service.TryGoBack());
 
         /// <summary>
         /// Creates a new <see cref="CreateNewPersonViewModel"/> instance.
         /// </summary>
-        public CreateNewPersonViewModel() => CreateCommand = new Capoala.MVVM.CommandRelay(() =>
+        public CreateNewPersonViewModel() => CreateCommand = new CommandRelay<object>((obj) =>
         {
             // This is the work that will be done when called.
             IsOperationInProgress = true;

@@ -10,6 +10,8 @@ namespace MvvmPlayground.ViewModels
 
         public CommandRelay CreateNewPersonCommand { get; } = new CommandRelay(() => Services.MainNavigationService.Service.NavigateTo(SharedState.SharedData.ViewModels.GetCreateNewPersonViewModel));
 
+        public CommandRelay GoBackToLastCreatedPersonCommand { get; } = new CommandRelay(() => Services.MainNavigationService.Service.TryGoForward());
+
         public PersonListingViewModel() => SharedState.SharedData.People.CollectionChanged += (s, e) => Notify(nameof(People));
     }
 }

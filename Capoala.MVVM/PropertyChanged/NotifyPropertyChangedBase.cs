@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Input;
 
 namespace Capoala.MVVM
 {
@@ -39,17 +36,12 @@ namespace Capoala.MVVM
         /// </summary>
         protected NotifyPropertyChangedBase()
         {
-#if DEBUG
-            System.Diagnostics.Debug.WriteLine("NotifyPropertyChangedBased");
-            var sw = new  System.Diagnostics.Stopwatch();
-            sw.Start();
-#endif
             foreach (var property in GetType().GetProperties())
             {
-                if (property.PropertyType == typeof(CommandRelay))
-                {                    
-                    var subscriptions = property.GetCustomAttributes(typeof(SubscribeToChanges), false)
-                                .Cast<SubscribeToChanges>()
+                if (property.PropertyType == typeof(CommandRelay) || (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(CommandRelay<>)))
+                {
+                    var subscriptions = property.GetCustomAttributes(typeof(RequeryCanExecuteChangedOnPropertyChange), false)
+                                .Cast<RequeryCanExecuteChangedOnPropertyChange>()
                                 .SelectMany(attr => attr.PropertyNames)
                                 .Distinct()
                                 .ToArray();
@@ -78,11 +70,6 @@ namespace Capoala.MVVM
                         ForcedSubscribers[property.Name] = registered;
                 }
             }
-
-#if DEBUG
-            sw.Stop();
-            System.Diagnostics.Debug.WriteLine(sw.Elapsed);
-#endif
         }
 
         /// <summary>
@@ -97,41 +84,22 @@ namespace Capoala.MVVM
         /// <param name="propertyName">The name of the property whose value has changed.</param>
         public virtual void Notify([CallerMemberName] string propertyName = null)
         {
-#if DEBUG
-            System.Diagnostics.Debug.WriteLine($"Notify({propertyName})");
-            var sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
-#endif
-
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
             foreach (var subscriber in Subscribers)
                 if (subscriber.Value.Contains(propertyName))
                     Notify(subscriber.Key);
 
-#if DEBUG
-            System.Diagnostics.Debug.WriteLine("Done with subscribers.");
-            System.Diagnostics.Debug.WriteLine(sw.Elapsed);
-#endif
-
             if (ForcedSubscribers.ContainsKey(propertyName))
                 foreach (var forcedSubscrober in ForcedSubscribers[propertyName])
                     Notify(forcedSubscrober);
 
-#if DEBUG
-            System.Diagnostics.Debug.WriteLine("Done with forced subscribers.");
-            System.Diagnostics.Debug.WriteLine(sw.Elapsed);
-#endif
-
             foreach (var subscriber in CommandRelaySubscribers)
                 if (subscriber.Value.Contains(propertyName))
-                    ((CommandRelay)subscriber.Key.GetValue(this)).NotifyCanExecuteDidChange();
-
-#if DEBUG
-            System.Diagnostics.Debug.WriteLine("Done with command relay subscribers.");
-            sw.Stop();
-            System.Diagnostics.Debug.WriteLine(sw.Elapsed);
-#endif
+                    if (subscriber.Key.PropertyType.IsGenericType)
+                        ((CommandRelay<dynamic>)subscriber.Key.GetValue(this)).NotifyCanExecuteDidChange();
+                    else
+                        ((CommandRelay)subscriber.Key.GetValue(this)).NotifyCanExecuteDidChange();
         }
 
         /// <summary>
@@ -150,6 +118,7 @@ namespace Capoala.MVVM
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>
         /// Returns <see langword="true"/>if the value was set; otherwise, <see langword="false"/>.
+        /// </returns>  
         public virtual bool SetAndNotify<T>(ref T backingField, T value, EqualityComparer<T> equalityComparer = null, [CallerMemberName] string propertyName = null)
         {
             if ((equalityComparer ?? EqualityComparer<T>.Default).Equals(value, backingField))

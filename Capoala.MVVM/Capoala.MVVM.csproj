@@ -2,10 +2,22 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.2;netcoreapp2.1;net472;net471;net47</TargetFrameworks>
-    <Version>2019.0.0-alpha.2</Version>
+    <Version>2019.0.0-alpha.3</Version>
     <Description>A featherweight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.</Description>
     <Copyright>Jonathan Nash</Copyright>
-    <PackageReleaseNotes>Release Notes 2019 (alpha 2)
+    <PackageReleaseNotes>Release Notes 2019 (alpha 3)
+
+- Added new "RequeryCanExecuteChangedOnPropertyChange" attribute for better clarity and type checking for automating the RelayCommand re-query function.
+
+- Corrected isues where the "GoBack" and "GoForward" suffered the same bug as NavigateTo method did.
+
+- Added additional configuration options to the MvvNavigatorBase class. 
+
+- Removed the IMvvNavigator as it has no value given the multi ways of implementing a navigation service. 
+
+- Added a simple version of the MvvmNavigator whcih only supports navigating to an object; nor more, no less.
+
+Release Notes 2019 (alpha 2)
 
 - BUG: Corrected issue with the navigation pushing the request object onto the "Back" stack instead of pushing the current object. This resulted in the item being navigated to to also be the previous item.
 
@@ -41,14 +53,8 @@ Provides default implementations of a navigation service.</PackageReleaseNotes>
     <PackageProjectUrl>https://capoala.github.io/Capoala.MVVM/</PackageProjectUrl>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Capoala.MVVM.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net47|AnyCPU'">
-    <DocumentationFile>bin\Release\net47\Capoala.MVVM.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|AnyCPU'">
-    <DocumentationFile>bin\Release\net462\Capoala.MVVM.xml</DocumentationFile>
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Capoala.MVVM.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

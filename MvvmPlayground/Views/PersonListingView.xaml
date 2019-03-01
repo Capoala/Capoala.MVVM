@@ -27,6 +27,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Grid.Row="2" HorizontalAlignment="Right" MinWidth="75" Padding="4 2 4 2" Content="Create New Person" Command="{Binding CreateNewPersonCommand}" Margin="0 16 0 0"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" MinWidth="75" Content="Modify Last Created Person" Padding="4 2 4 2" Margin="0 16 0 0" Command="{Binding GoBackToLastCreatedPersonCommand}" HorizontalAlignment="Left"/>
+            <Button Grid.Column="1" MinWidth="75" Content="Create" Padding="4 2 4 2" Margin="0 16 0 0" Command="{Binding CreateNewPersonCommand}" HorizontalAlignment="Right"/>
+        </Grid>        
     </Grid>
 </UserControl>

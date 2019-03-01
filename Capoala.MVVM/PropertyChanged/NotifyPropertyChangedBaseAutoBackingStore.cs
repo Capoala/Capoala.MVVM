@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace Capoala.MVVM
 {
@@ -35,6 +33,7 @@ namespace Capoala.MVVM
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>
         /// Returns <see langword="true"/>if the value was set; otherwise, <see langword="false"/>.
+        /// </returns>
         public virtual bool Set<T>(T value, EqualityComparer<T> equalityComparer = null, [CallerMemberName] string propertyName = null)
         {
             if (!equalityComparer?.Equals(value, Get<T>(propertyName)) ?? !EqualityComparer<T>.Default.Equals(value, Get<T>(propertyName)))
@@ -58,6 +57,6 @@ namespace Capoala.MVVM
         /// When this method returns, contains the value associated with the specified key,
         /// if the key is found; otherwise, the default value for the type of the value parameter.
         /// </returns>
-        public virtual T Get<T>([CallerMemberName] string propertyName = null) => BackingStore.TryGetValue(propertyName, out var value) ? (T)value : default(T);
+        public virtual T Get<T>([CallerMemberName] string propertyName = null) => BackingStore.TryGetValue(propertyName, out var value) ? (T)value : default;
     }
 }
