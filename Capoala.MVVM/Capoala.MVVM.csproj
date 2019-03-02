@@ -2,51 +2,45 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.2;netcoreapp2.1;net472;net471;net47</TargetFrameworks>
-    <Version>2019.0.0-alpha.3</Version>
+    <Version>2019.0.0-alpha.4</Version>
     <Description>A featherweight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.</Description>
     <Copyright>Jonathan Nash</Copyright>
-    <PackageReleaseNotes>Release Notes 2019 (alpha 3)
+    <PackageReleaseNotes>Release Notes 2019
+
+alpha 4:
+
+- Added summaries.
+- Added new interface INotifyPropertyChanges to provide a common object for various implementations of the INotifyPropertyChanged interface.
+- Updated the naming of abstract classes and interface implementations to use the new INotifyPropertyChanges interface.
+- Added attribute usage to attributes.
+
+alpha 3:
 
 - Added new "RequeryCanExecuteChangedOnPropertyChange" attribute for better clarity and type checking for automating the RelayCommand re-query function.
+- Corrected issues where the "GoBack" and "GoForward" suffered the same bug as NavigateTo method did.
+- Added additional configuration options to the MvvmNavigatorBase class.
+- Removed the IMvvmNavigator as it has no value given the multi ways of implementing a navigation service.
+- Added a simple version of the MvvmNavigator which only supports navigating to an object; nor more, no less.
 
-- Corrected isues where the "GoBack" and "GoForward" suffered the same bug as NavigateTo method did.
-
-- Added additional configuration options to the MvvNavigatorBase class. 
-
-- Removed the IMvvNavigator as it has no value given the multi ways of implementing a navigation service. 
-
-- Added a simple version of the MvvmNavigator whcih only supports navigating to an object; nor more, no less.
-
-Release Notes 2019 (alpha 2)
+alpha 2:
 
 - BUG: Corrected issue with the navigation pushing the request object onto the "Back" stack instead of pushing the current object. This resulted in the item being navigated to to also be the previous item.
-
 - NEW: Added a default class for abstract implementation for the MvvmNavigatorBase.
 
-Release Notes 2019 (alpha 1)
-
-- API Breaking - 
+alpha 1:
 
 - Updated framework support.
-- Updated attribute handling for cleaner code and higher performance. 
+- Updated attribute handling for cleaner code and higher performance.
 - Updated attribute names for clarity.
 - Added new attribute for allowing the CommandRelay to subscribe to property changes to re-trigger the "CanExecute" evaluations.
 - Isolated classes to separate files.
 - Implemented a new abstraction pattern for navigation along with custom event arguments.
-- Added an intermediate base class for implementing the INotifyPropertyChanged interface. 
-
-Release Notes 2017.1.2.4
-The Set() and SetAndNotify() methods now return a boolean value for evaluating whether the property was set or not.
-The Set() and SetAndNotify() methods now allow for a different equality comparer to be used.
-
-Release Notes 2017.1.1.3
-Provides default implementations of the INotifyPropertyChanged interface.
-Provides default implementations of the ICommand interface.
-Provides default implementations of a navigation service.</PackageReleaseNotes>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+- Added an intermediate base class for implementing the INotifyPropertyChanged interface.
+    </PackageReleaseNotes>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Company>Jonathan Nash</Company>
     <Authors>Jonathan Nash</Authors>
-    <PackageTags>capoala nash mvvm ICommand RelayCommand relay-command INotifyPropertyChanged</PackageTags>
+    <PackageTags>capoala nash mvvm ICommand command relay INotifyPropertyChanged</PackageTags>
     <AssemblyVersion>2019.0.0.0</AssemblyVersion>
     <FileVersion>2019.0.0.0</FileVersion>
     <PackageLicenseUrl>https://github.com/Capoala/Capoala.MVVM/blob/master/LICENSE</PackageLicenseUrl>
