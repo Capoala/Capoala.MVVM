@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Capoala.MVVM
@@ -19,7 +20,7 @@ namespace Capoala.MVVM
         protected NotifyPropertyChangedBaseAutoBackingStore() { }
 
         /// <summary>
-        /// Sets the backing value to the value provided and raises the <see cref="PropertyChanged"/> event for the given property name.
+        /// Sets the backing value to the value provided and raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event for the given property name.
         /// <para>
         /// All properties subscribed to this property via the <see cref="SubscribeToChanges"/> 
         /// attribute are raised.
@@ -51,7 +52,6 @@ namespace Capoala.MVVM
         /// <summary>
         /// Returns the underlying value for the given property name.
         /// </summary>
-        /// <param name="value">The value to set.</param>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>
         /// When this method returns, contains the value associated with the specified key,
