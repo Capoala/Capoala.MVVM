@@ -5,6 +5,7 @@ namespace Capoala.MVVM
     /// <summary>
     /// An attribute to specify other properties that should be notified when this property's value changes.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
     public sealed class NotifyOnChange : Attribute
     {
         /// <summary>

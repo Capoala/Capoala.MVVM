@@ -5,6 +5,7 @@ namespace Capoala.MVVM
     /// <summary>
     /// An attribute for subscribing to the change events of other properties.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
     public sealed class SubscribeToChanges : Attribute
     {
         /// <summary>

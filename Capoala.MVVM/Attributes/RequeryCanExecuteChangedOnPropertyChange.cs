@@ -6,6 +6,7 @@ namespace Capoala.MVVM
     /// An attribute for subscribing to the change events of other properties
     /// to automate the requery for <see cref="CommandRelay"/> or <see cref="CommandRelay{TParameter}"/> implementations.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
     public sealed class RequeryCanExecuteChangedOnPropertyChange : Attribute
     {
         /// <summary>
