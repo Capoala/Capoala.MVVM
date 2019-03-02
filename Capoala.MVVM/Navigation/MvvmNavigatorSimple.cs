@@ -4,17 +4,19 @@
     /// A simple implementation for navigation.
     /// </summary>
     /// <typeparam name="TNavigationItem">The type of navigation item.</typeparam>
-    public class SimpleMvvmNavigator<TNavigationItem>
+    public sealed class SimpleMvvmNavigator<TNavigationItem>
     {
         /// <summary>
         /// The current navigation item.
         /// </summary>
         public TNavigationItem CurrentNavigationItem { get; private set; }
 
+
         /// <summary>
         /// Triggers when navigation occurs.
         /// </summary>
         public event NavigationChangedEventHandler<TNavigationItem> NavigationDidHappen;
+
 
         /// <summary>
         /// Navigates to the provided navigation item.

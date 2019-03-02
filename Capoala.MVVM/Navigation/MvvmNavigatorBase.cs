@@ -14,6 +14,7 @@ namespace Capoala.MVVM
         /// </summary>
         protected MvvmNavigatorBase() { }
 
+
         /// <summary>
         /// A LIFO collection which stores previous navigation items.
         /// </summary>
@@ -25,21 +26,11 @@ namespace Capoala.MVVM
         /// </summary>
         private Stack<TNavigationItem> ForwardNavigationStack { get; } = new Stack<TNavigationItem>();
 
+
         /// <summary>
         /// The current navigation item.
         /// </summary>
         public TNavigationItem CurrentNavigationItem { get; protected set; }
-
-        /// <summary>
-        /// Determines if it's possible to go back to the previous navigation item.
-        /// </summary>
-        public bool CanGoBack => BackNavigationStack.Any();
-
-        /// <summary>
-        /// Determines if it's possible to go back to the previous navigation item
-        /// after performing a "go back" operation.
-        /// </summary>
-        public bool CanGoForward => ForwardNavigationStack.Any();
 
         /// <summary>
         /// A LIFO collection which stores previous navigation items exclusively coming from 
@@ -52,6 +43,17 @@ namespace Capoala.MVVM
         /// a "go back" operation.
         /// </summary>
         public IEnumerable<TNavigationItem> ForwardStack => ForwardNavigationStack;
+
+        /// <summary>
+        /// Determines if it's possible to go back to the previous navigation item.
+        /// </summary>
+        public bool CanGoBack => SupportsBackNavigation && BackNavigationStack.Any();
+
+        /// <summary>
+        /// Determines if it's possible to go back to the previous navigation item
+        /// after performing a "go back" operation.
+        /// </summary>
+        public bool CanGoForward => SupportsForwardNavigation && ForwardNavigationStack.Any();
 
         /// <summary>
         /// Determines whether the ability to go back to the previous
@@ -78,11 +80,29 @@ namespace Capoala.MVVM
         /// </summary>
         public event NavigationChangedEventHandler<TNavigationItem> NavigationDidHappen;
 
+
         /// <summary>
         /// Raises the <see cref="NavigationDidHappen"/> event.
         /// </summary>
         /// <param name="navigationItem">The navigation item that triggered the event.</param>
         protected void OnNavigationDidHappen(TNavigationItem navigationItem) => NavigationDidHappen?.Invoke(this, new NavigationChangedEventArgs<TNavigationItem>(navigationItem));
+
+        /// <summary>
+        /// Navigates to the provided navigation item.
+        /// </summary>
+        /// <param name="navigationItem">The item to navigate to.</param>
+        public virtual void NavigateTo(TNavigationItem navigationItem)
+        {
+            if (SupportsBackNavigation)
+                if (CurrentNavigationItem != null)
+                    BackNavigationStack.Push(CurrentNavigationItem);
+
+            if (AutoClearForwardStackOnNavigation)
+                ClearForwardStack();
+
+            CurrentNavigationItem = navigationItem;
+            OnNavigationDidHappen(navigationItem);
+        }
 
         /// <summary>
         /// Clears the back stack.
@@ -120,23 +140,6 @@ namespace Capoala.MVVM
 
             CurrentNavigationItem = lastItem;
             OnNavigationDidHappen(lastItem);
-        }
-
-        /// <summary>
-        /// Navigates to the provided navigation item.
-        /// </summary>
-        /// <param name="navigationItem">The item to navigate to.</param>
-        public virtual void NavigateTo(TNavigationItem navigationItem)
-        {
-            if (SupportsBackNavigation)
-                if (CurrentNavigationItem != null)
-                    BackNavigationStack.Push(CurrentNavigationItem);
-
-            if (AutoClearForwardStackOnNavigation)
-                ClearForwardStack();
-
-            CurrentNavigationItem = navigationItem;
-            OnNavigationDidHappen(navigationItem);
         }
 
         /// <summary>

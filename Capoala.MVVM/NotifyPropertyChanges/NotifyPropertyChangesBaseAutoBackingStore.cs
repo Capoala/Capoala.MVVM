@@ -10,14 +10,26 @@ namespace Capoala.MVVM
     public abstract class NotifyPropertyChangesBaseAutoBackingStore : NotifyPropertyChangesBase
     {
         /// <summary>
+        /// Creates a new instance of <see cref="NotifyPropertyChangesBaseAutoBackingStore"/>.
+        /// </summary>
+        protected NotifyPropertyChangesBaseAutoBackingStore() { }
+
+
+        /// <summary>
         /// The container for storing the values for property names.
         /// </summary>
         private readonly Dictionary<string, object> BackingStore = new Dictionary<string, object>();
 
+
         /// <summary>
-        /// Creates a new instance of <see cref="NotifyPropertyChangesBaseAutoBackingStore"/>.
+        /// Returns the underlying value for the given property name.
         /// </summary>
-        protected NotifyPropertyChangesBaseAutoBackingStore() { }
+        /// <param name="propertyName">The name of the property.</param>
+        /// <returns>
+        /// When this method returns, contains the value associated with the specified key,
+        /// if the key is found; otherwise, the default value for the type of the value parameter.
+        /// </returns>
+        public virtual T Get<T>([CallerMemberName] string propertyName = null) => BackingStore.TryGetValue(propertyName, out var value) ? (T)value : default;
 
         /// <summary>
         /// Sets the backing value to the value provided and raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event for the given property name.
@@ -48,15 +60,5 @@ namespace Capoala.MVVM
                 return false;
             }
         }
-
-        /// <summary>
-        /// Returns the underlying value for the given property name.
-        /// </summary>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <returns>
-        /// When this method returns, contains the value associated with the specified key,
-        /// if the key is found; otherwise, the default value for the type of the value parameter.
-        /// </returns>
-        public virtual T Get<T>([CallerMemberName] string propertyName = null) => BackingStore.TryGetValue(propertyName, out var value) ? (T)value : default;
     }
 }

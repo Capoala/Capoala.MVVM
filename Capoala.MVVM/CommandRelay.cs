@@ -9,6 +9,18 @@ namespace Capoala.MVVM
     public sealed class CommandRelay : ICommand
     {
         /// <summary>
+        /// Creates a new instance of <see cref="CommandRelay"/>.
+        /// </summary>
+        /// <param name="action">The action to invoke.</param>
+        /// <param name="predicate">The method that defines whether the command can execute.</param>
+        public CommandRelay(Action action, Func<bool> predicate = null)
+        {
+            RelayAction = action;
+            Predicate = predicate;
+        }
+
+
+        /// <summary>
         /// The function which determines whether this object is allowed to execute.
         /// </summary>
         private readonly Func<bool> Predicate;
@@ -18,10 +30,12 @@ namespace Capoala.MVVM
         /// </summary>
         private readonly Action RelayAction;
 
+
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
         public event EventHandler CanExecuteChanged;
+
 
         /// <summary>
         /// Defines the method that determines whether the command can execute in its current state.
@@ -42,17 +56,6 @@ namespace Capoala.MVVM
         /// Notifies the client that the ability to execute the command has changed.
         /// </summary>
         public void NotifyCanExecuteDidChange() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-
-        /// <summary>
-        /// Creates a new instance of <see cref="CommandRelay"/>.
-        /// </summary>
-        /// <param name="action">The action to invoke.</param>
-        /// <param name="predicate">The method that defines whether the command can execute.</param>
-        public CommandRelay(Action action, Func<bool> predicate = null)
-        {
-            RelayAction = action;
-            Predicate = predicate;
-        }
     }
 
     /// <summary>
@@ -60,6 +63,18 @@ namespace Capoala.MVVM
     /// </summary>
     public sealed class CommandRelay<TParameter> : ICommand
     {
+        /// <summary>
+        /// Creates a new instance of <see cref="CommandRelay{TParameter}"/>.
+        /// </summary>
+        /// <param name="action">The action to invoke.</param>
+        /// <param name="predicate">The method that defines whether the command can execute.</param>
+        public CommandRelay(Action<TParameter> action, Func<bool> predicate = null)
+        {
+            RelayAction = action;
+            Predicate = predicate;
+        }
+
+
         /// <summary>
         /// The function which determines whether this object is allowed to execute.
         /// </summary>
@@ -70,10 +85,12 @@ namespace Capoala.MVVM
         /// </summary>
         private readonly Action<TParameter> RelayAction;
 
+
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
         public event EventHandler CanExecuteChanged;
+
 
         /// <summary>
         /// Defines the method that determines whether the command can execute in its current state.
@@ -91,17 +108,6 @@ namespace Capoala.MVVM
         /// <summary>
         /// Notifies the client that the ability to execute the command has changed.
         /// </summary>
-        public void NotifyCanExecuteDidChange() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-
-        /// <summary>
-        /// Creates a new instance of <see cref="CommandRelay{TParameter}"/>.
-        /// </summary>
-        /// <param name="action">The action to invoke.</param>
-        /// <param name="predicate">The method that defines whether the command can execute.</param>
-        public CommandRelay(Action<TParameter> action, Func<bool> predicate = null)
-        {
-            RelayAction = action;
-            Predicate = predicate;
-        }
+        public void NotifyCanExecuteDidChange() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);        
     }
 }

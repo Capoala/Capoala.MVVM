@@ -12,26 +12,6 @@ namespace Capoala.MVVM
     public abstract class NotifyPropertyChangesBase : INotifyPropertyChanges
     {
         /// <summary>
-        /// Contains the lookup of properties with the <see cref="SubscribeToChanges"/> attribute.
-        /// </summary>
-        private readonly Dictionary<string, string[]> Subscribers = new Dictionary<string, string[]>();
-
-        /// <summary>
-        /// Contains the lookup of properties with the <see cref="NotifyOnChange"/> attribute.
-        /// </summary>
-        private readonly Dictionary<string, string[]> ForcedSubscribers = new Dictionary<string, string[]>();
-
-        /// <summary>
-        /// Contains the lookup for properties of type <see cref="CommandRelay"/> with the <see cref="SubscribeToChanges"/> attribute.
-        /// </summary>
-        private readonly Dictionary<PropertyInfo, string[]> CommandRelaySubscribers = new Dictionary<PropertyInfo, string[]>();
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
         /// Creates a new instance of <see cref="NotifyPropertyChangesBase"/>.
         /// </summary>
         protected NotifyPropertyChangesBase()
@@ -71,6 +51,29 @@ namespace Capoala.MVVM
                 }
             }
         }
+
+
+        /// <summary>
+        /// Contains the lookup of properties with the <see cref="SubscribeToChanges"/> attribute.
+        /// </summary>
+        private readonly Dictionary<string, string[]> Subscribers = new Dictionary<string, string[]>();
+
+        /// <summary>
+        /// Contains the lookup of properties with the <see cref="NotifyOnChange"/> attribute.
+        /// </summary>
+        private readonly Dictionary<string, string[]> ForcedSubscribers = new Dictionary<string, string[]>();
+
+        /// <summary>
+        /// Contains the lookup for properties of type <see cref="CommandRelay"/> with the <see cref="SubscribeToChanges"/> attribute.
+        /// </summary>
+        private readonly Dictionary<PropertyInfo, string[]> CommandRelaySubscribers = new Dictionary<PropertyInfo, string[]>();
+
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
         /// <summary>
         /// Raises the <see cref="PropertyChanged"/> event.
