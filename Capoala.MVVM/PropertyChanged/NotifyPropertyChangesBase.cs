@@ -9,7 +9,7 @@ namespace Capoala.MVVM
     /// <summary>
     /// A base class for implementing the <see cref="INotifyPropertyChanged"/> interface.
     /// </summary>
-    public abstract class NotifyPropertyChangedBase : INotifyPropertyChanged
+    public abstract class NotifyPropertyChangesBase : INotifyPropertyChanges
     {
         /// <summary>
         /// Contains the lookup of properties with the <see cref="SubscribeToChanges"/> attribute.
@@ -32,9 +32,9 @@ namespace Capoala.MVVM
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Creates a new instance of <see cref="NotifyPropertyChangedBase"/>.
+        /// Creates a new instance of <see cref="NotifyPropertyChangesBase"/>.
         /// </summary>
-        protected NotifyPropertyChangedBase()
+        protected NotifyPropertyChangesBase()
         {
             foreach (var property in GetType().GetProperties())
             {

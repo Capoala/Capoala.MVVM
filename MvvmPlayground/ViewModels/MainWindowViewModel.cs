@@ -2,9 +2,9 @@
 
 namespace MvvmPlayground.ViewModels
 {
-    internal class MainWindowViewModel : NotifyPropertyChangedBaseAutoBackingStore
+    internal class MainWindowViewModel : NotifyPropertyChangesBaseAutoBackingStore
     {
-        public object CurrentViewModel { get => Get<object>(); set => Set(value); }
+        public INotifyPropertyChanges CurrentViewModel { get => Get<INotifyPropertyChanges>(); set => Set(value); }
 
         public MainWindowViewModel()
         {

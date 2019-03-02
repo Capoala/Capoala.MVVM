@@ -7,7 +7,7 @@ namespace Capoala.MVVM
     /// <summary>
     /// A base class for implementing the <see cref="INotifyPropertyChanged"/> interface.
     /// </summary>
-    public abstract class NotifyPropertyChangedBaseAutoBackingStore : NotifyPropertyChangedBase
+    public abstract class NotifyPropertyChangesBaseAutoBackingStore : NotifyPropertyChangesBase
     {
         /// <summary>
         /// The container for storing the values for property names.
@@ -15,9 +15,9 @@ namespace Capoala.MVVM
         private readonly Dictionary<string, object> BackingStore = new Dictionary<string, object>();
 
         /// <summary>
-        /// Creates a new instance of <see cref="NotifyPropertyChangedBaseAutoBackingStore"/>.
+        /// Creates a new instance of <see cref="NotifyPropertyChangesBaseAutoBackingStore"/>.
         /// </summary>
-        protected NotifyPropertyChangedBaseAutoBackingStore() { }
+        protected NotifyPropertyChangesBaseAutoBackingStore() { }
 
         /// <summary>
         /// Sets the backing value to the value provided and raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event for the given property name.

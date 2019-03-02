@@ -7,7 +7,7 @@ namespace Capoala.MVVM
     /// <summary>
     /// A base class for implementing the <see cref="INotifyPropertyChanged"/> interface.
     /// </summary>
-    public abstract class NotifyPropertyChangedBaseSlim : INotifyPropertyChanged
+    public abstract class NotifyPropertyChangesBaseSlim : INotifyPropertyChanges
     {
         /// <summary>
         /// Occurs when a property value changes.
@@ -15,9 +15,9 @@ namespace Capoala.MVVM
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Creates a new instance of <see cref="NotifyPropertyChangedBaseSlim"/>.
+        /// Creates a new instance of <see cref="NotifyPropertyChangesBaseSlim"/>.
         /// </summary>
-        protected NotifyPropertyChangedBaseSlim() { }
+        protected NotifyPropertyChangesBaseSlim() { }
 
         /// <summary>
         /// Raises the <see cref="PropertyChanged"/> event.

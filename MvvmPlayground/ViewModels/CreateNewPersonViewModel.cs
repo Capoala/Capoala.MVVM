@@ -11,7 +11,7 @@ namespace MvvmPlayground.ViewModels
     /// <summary>
     /// A view mode for creating a new person.
     /// </summary>
-    internal class CreateNewPersonViewModel : NotifyPropertyChangedBase
+    internal class CreateNewPersonViewModel : NotifyPropertyChangesBase
     {
         private bool _isOperationInProgress = false;
         private string _firstName;
