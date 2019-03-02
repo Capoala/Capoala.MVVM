@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Capoala.MVVM, Version=2019.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Capoala.MVVM.2019.0.0-alpha.4\lib\net472\Capoala.MVVM.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -117,6 +114,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Capoala.MVVM\Capoala.MVVM.csproj">
+      <Project>{e9e5c251-3486-49a2-bb8e-7a4dc1ebc2da}</Project>
+      <Name>Capoala.MVVM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
