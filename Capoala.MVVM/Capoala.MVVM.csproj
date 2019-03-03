@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.2;netcoreapp2.1;net472;net471;net47</TargetFrameworks>
-    <Version>2019.0.0-beta.1</Version>
+    <Version>2019.0.0-beta.3</Version>
     <Description>A featherweight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.</Description>
     <Copyright></Copyright>
     <PackageReleaseNotes>Release Notes 2019
@@ -29,12 +29,10 @@ of naming conflicts, undesirable - or lack of - functionality, and scalability.
 - SimpleMvvmNavigator is a simplified implementation of MvvmNavigatorBase, but does not inherit from MvvmNavigatorBase.
 - The navigation service implementations now utilize a custom event handler NavigationChangedEventHandler with event argument NavigationChangedEventArgs.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Company>Jonathan Nash</Company>
     <Authors>Jonathan Nash</Authors>
     <PackageTags>capoala nash mvvm ICommand command relay INotifyPropertyChanged</PackageTags>
     <AssemblyVersion>2019.0.0.0</AssemblyVersion>
     <FileVersion>2019.0.0.0</FileVersion>
-    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://capoala.github.io/Capoala.MVVM/</PackageProjectUrl>
   </PropertyGroup>
 
@@ -42,6 +40,13 @@ of naming conflicts, undesirable - or lack of - functionality, and scalability.
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Capoala.MVVM.xml</DocumentationFile>
     <RepositoryUrl>https://github.com/Capoala/Capoala.MVVM</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Capoala.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  
 </Project>
