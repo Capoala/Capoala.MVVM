@@ -60,7 +60,7 @@ namespace MvvmPlayground.ViewModels
         /// <see cref="IsOperationInProgress"/> changes, the method <see cref="CommandRelay.NotifyCanExecuteDidChange"/>
         /// is executed for this property.
         /// </remarks>
-        [RequeryCanExecuteChangedOnPropertyChange(nameof(FirstName), nameof(LastName), nameof(IsOperationInProgress))]
+        [CanExecuteDependentOn(nameof(FirstName), nameof(LastName), nameof(IsOperationInProgress))]
         public CommandRelay<object> CreateCommand { get; }
 
         /// <summary>

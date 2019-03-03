@@ -41,7 +41,7 @@ namespace Capoala.MVVM
         /// </para>
         /// </summary>
         /// <typeparam name="T">The type of value being set.</typeparam>
-        /// <param name="value">The value to set.</param>
+        /// <param name="value">The value.</param>
         /// <param name="equalityComparer">The <see cref="IEqualityComparer{T}"/> implementation to use.</param>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>

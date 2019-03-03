@@ -7,13 +7,13 @@ namespace Capoala.MVVM
     /// to automate the re-query for <see cref="CommandRelay"/> or <see cref="CommandRelay{TParameter}"/> implementations.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
-    public sealed class RequeryCanExecuteChangedOnPropertyChange : Attribute
+    public sealed class CanExecuteDependentOn : Attribute
     {
         /// <summary>
-        /// Creates a new instance of <see cref="RequeryCanExecuteChangedOnPropertyChange"/>.
+        /// Creates a new instance of <see cref="CanExecuteDependentOn"/>.
         /// </summary>
         /// <param name="propertyNames">The property names to subscribe to.</param>
-        public RequeryCanExecuteChangedOnPropertyChange(params string[] propertyNames) => PropertyNames = propertyNames;
+        public CanExecuteDependentOn(params string[] propertyNames) => PropertyNames = propertyNames;
 
 
         /// <summary>
