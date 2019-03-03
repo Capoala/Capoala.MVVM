@@ -2,53 +2,46 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.2;netcoreapp2.1;net472;net471;net47</TargetFrameworks>
-    <Version>2019.0.0-alpha.4</Version>
+    <Version>2019.0.0-beta.1</Version>
     <Description>A featherweight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.</Description>
-    <Copyright>Jonathan Nash</Copyright>
+    <Copyright></Copyright>
     <PackageReleaseNotes>Release Notes 2019
 
-alpha 4:
+API Breaking Changes
 
-- Added summaries.
-- Added new interface INotifyPropertyChanges to provide a common object for various implementations of the INotifyPropertyChanged interface.
-- Updated the naming of abstract classes and interface implementations to use the new INotifyPropertyChanges interface.
-- Added attribute usage to attributes.
+This release is incompatible with prior 2017.x releases. Breaking API changes were made due to a combination
+of naming conflicts, undesirable - or lack of - functionality, and scalability.
 
-alpha 3:
 
-- Added new "RequeryCanExecuteChangedOnPropertyChange" attribute for better clarity and type checking for automating the RelayCommand re-query function.
-- Corrected issues where the "GoBack" and "GoForward" suffered the same bug as NavigateTo method did.
-- Added additional configuration options to the MvvmNavigatorBase class.
-- Removed the IMvvmNavigator as it has no value given the multi ways of implementing a navigation service.
-- Added a simple version of the MvvmNavigator which only supports navigating to an object; nor more, no less.
-
-alpha 2:
-
-- BUG: Corrected issue with the navigation pushing the request object onto the "Back" stack instead of pushing the current object. This resulted in the item being navigated to to also be the previous item.
-- NEW: Added a default class for abstract implementation for the MvvmNavigatorBase.
-
-alpha 1:
-
-- Updated framework support.
-- Updated attribute handling for cleaner code and higher performance.
-- Updated attribute names for clarity.
-- Added new attribute for allowing the CommandRelay to subscribe to property changes to re-trigger the "CanExecute" evaluations.
-- Isolated classes to separate files.
-- Implemented a new abstraction pattern for navigation along with custom event arguments.
-- Added an intermediate base class for implementing the INotifyPropertyChanged interface.
-    </PackageReleaseNotes>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+- RelayCommand and RelayCommand&lt;TParameter&gt; have been renamed to CommandRelay and CommandRelay&lt;TExecutionParameter&gt; respectively.
+- CommandRelay&lt;TExecutionParameter&gt; no longer supports parameter passing to the CanExecutePredicate function.
+- NotifiedOnChange has been renamed to SubscribeToChanges.
+- NotifiesOnChange has been renamed to NotifyOnChange.
+- A new attribute, CanExecuteDependentOn, now allows for a CommandRelay property to subscribe to property changes that will invoke the CommandRelay's NotifyCanExecuteDidChange() method. 
+- New INotifyPropertyChanges interface for providing a common object for INotifyPropertyChanged implementations.
+- NotifyingObjectBaseSlim has been renamed to NotifyPropertyChangesBaseSlim and implements the INotifyPropertyChanges interface.
+- NotifyingObjectBase has been renamed to NotifyPropertyChangesBase and implements the INotifyPropertyChanges interface. 
+- NotifyPropertyChangesBase supports the NotifyOnChange, SubscribeToChanges, and CanExecuteDependentOn attributes.
+- The "auto backing store" functionality has been moved into a new class named NotifyPropertyChangesBaseAutoBackingStore.
+- The INavigationService&lt;TNavigationItem&gt; has been dropped. 
+- The NavigationServiceBase&lt;TNavigationItem&gt; has been revamped and renamed to MvvmNavigatorBase&lt;TNavigationItem&gt;. 
+- DefaultNavigationService has been renamed to MvvmNavigator&lt;TNavigationItem&gt; and inherits from MvvmNavigatorBase&lt;TNavigationItem&gt;.
+- SimpleMvvmNavigator is a simplified implementation of MvvmNavigatorBase, but does not inherit from MvvmNavigatorBase.
+- The navigation service implementations now utilize a custom event handler NavigationChangedEventHandler with event argument NavigationChangedEventArgs.</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>Jonathan Nash</Company>
     <Authors>Jonathan Nash</Authors>
     <PackageTags>capoala nash mvvm ICommand command relay INotifyPropertyChanged</PackageTags>
     <AssemblyVersion>2019.0.0.0</AssemblyVersion>
     <FileVersion>2019.0.0.0</FileVersion>
-    <PackageLicenseUrl>https://github.com/Capoala/Capoala.MVVM/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://capoala.github.io/Capoala.MVVM/</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Capoala.MVVM.xml</DocumentationFile>
+    <RepositoryUrl>https://github.com/Capoala/Capoala.MVVM</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
 </Project>
