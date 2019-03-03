@@ -1,9 +1,4 @@
 ﻿using Capoala.MVVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MvvmPlayground.ViewModels
@@ -44,7 +39,7 @@ namespace MvvmPlayground.ViewModels
         [SubscribeToChanges(nameof(FirstName), nameof(LastName))]
         public string DisplayName => string.IsNullOrEmpty(LastName) && string.IsNullOrEmpty(FirstName)
             ? null
-            : string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(FirstName) 
+            : string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(FirstName)
             ? $"{FirstName}"
             : !string.IsNullOrEmpty(LastName) && string.IsNullOrEmpty(FirstName)
             ? $"{LastName}"
@@ -66,7 +61,7 @@ namespace MvvmPlayground.ViewModels
         /// <summary>
         /// Cancels the operation by going back to the previous page.
         /// </summary>
-        public CommandRelay CancelCommand { get; } = new CommandRelay(() => Services.MainNavigationService.Service.TryGoBack());
+        public CommandRelay CancelCommand { get; } = new CommandRelay(() => Services.NavigationServices.MainService.TryGoBack());
 
         /// <summary>
         /// Creates a new <see cref="CreateNewPersonViewModel"/> instance.
@@ -78,7 +73,7 @@ namespace MvvmPlayground.ViewModels
             SharedState.SharedData.People.Add(new Models.Person() { FirstName = FirstName, LastName = LastName });
             MessageBox.Show($"{FirstName} {LastName} has been created!", DisplayName, MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             IsOperationInProgress = false;
-            Services.MainNavigationService.Service.NavigateTo(SharedState.SharedData.ViewModels.GetPersonListingViewModel.Value);
+            Services.NavigationServices.MainService.NavigateTo(SharedState.SharedData.ViewModels.GetPersonListingViewModel.Value);
 
             // We'll add the logic for determining whether the command is enabled or not. 
             // Notice we use the same property names with the attribute for this property.

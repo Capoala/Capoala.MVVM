@@ -2,8 +2,14 @@
 
 namespace MvvmPlayground.Services
 {
-    internal static class MainNavigationService
+    /// <summary>
+    /// A container for storing navigation services.
+    /// </summary>
+    internal static class NavigationServices
     {
-        internal static MvvmNavigator<INotifyPropertyChanges> Service { get; } = new MvvmNavigator<INotifyPropertyChanges>();
+        /// <summary>
+        /// The main navigation service.
+        /// </summary>
+        internal static MvvmNavigator<INotifyPropertyChanges> MainService { get; } = new MvvmNavigator<INotifyPropertyChanges>();
     }
 }

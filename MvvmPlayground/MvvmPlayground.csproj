@@ -106,7 +106,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -116,10 +115,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Capoala.MVVM\Capoala.MVVM.csproj">
-      <Project>{e9e5c251-3486-49a2-bb8e-7a4dc1ebc2da}</Project>
-      <Name>Capoala.MVVM</Name>
-    </ProjectReference>
+    <PackageReference Include="Capoala.MVVM">
+      <Version>2019.0.0-beta.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
