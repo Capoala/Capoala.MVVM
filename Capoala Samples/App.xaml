@@ -1,0 +1,44 @@
+﻿<Application x:Class="Capoala_Samples.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="clr-namespace:Capoala_Samples.Models"
+             xmlns:viewModels="clr-namespace:Capoala_Samples.ViewModels"
+             xmlns:views="clr-namespace:Capoala_Samples.Views"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <DataTemplate DataType="{x:Type viewModels:SampleViewModelSlim}">
+            <views:SampleView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:SampleViewModel}">
+            <views:SampleView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:SampleViewModelAutoBackingStore}">
+            <views:SampleView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type models:MessageModel}">
+            <TextBlock Text="{Binding Message}"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type models:ProgressReporter}">
+            <StackPanel HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center">
+                <TextBlock Text="{Binding Status}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>                
+                <ProgressBar IsIndeterminate="False"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Center"
+                             Height="6"
+                             Margin="0 4 0 0"
+                         Value="{Binding CurrentProgressComplete}"/>
+            </StackPanel>
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>

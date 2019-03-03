@@ -11,7 +11,7 @@
         public string FirstName { get; set; }
 
         /// <summary>
-        /// The last name of the perosn.
+        /// The last name of the person.
         /// </summary>
         public string LastName { get; set; }
     }

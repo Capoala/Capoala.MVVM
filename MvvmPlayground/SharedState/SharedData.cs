@@ -21,11 +21,6 @@ namespace MvvmPlayground.SharedState
         internal static class ViewModels
         {
             /// <summary>
-            /// Creates and returns a new instance of <see cref="CreateNewPersonViewModel"/>.
-            /// </summary>
-            internal static CreateNewPersonViewModel GetCreateNewPersonViewModel => new CreateNewPersonViewModel();
-
-            /// <summary>
             /// Returns the value of the lazy singleton for <see cref="PersonListingViewModel"/>.
             /// </summary>
             internal static Lazy<PersonListingViewModel> GetPersonListingViewModel { get; } = new Lazy<PersonListingViewModel>();

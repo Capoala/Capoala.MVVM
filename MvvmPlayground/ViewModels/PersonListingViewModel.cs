@@ -18,7 +18,7 @@ namespace MvvmPlayground.ViewModels
         /// Navigates to a new view where a person can be created.
         /// </summary>
         public CommandRelay CreateNewPersonCommand { get; } = new CommandRelay(
-            () => Services.NavigationServices.MainService.NavigateTo(SharedState.SharedData.ViewModels.GetCreateNewPersonViewModel));
+            () => Services.NavigationServices.MainService.NavigateTo(new CreateNewPersonViewModel()));
 
         /// <summary>
         /// Returns to the previous person creation view.

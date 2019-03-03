@@ -1,4 +1,6 @@
 ﻿using Capoala.MVVM;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace MvvmPlayground.ViewModels
@@ -56,7 +58,7 @@ namespace MvvmPlayground.ViewModels
         /// is executed for this property.
         /// </remarks>
         [CanExecuteDependentOn(nameof(FirstName), nameof(LastName), nameof(IsOperationInProgress))]
-        public CommandRelay<object> CreateCommand { get; }
+        public CommandRelay CreateCommand { get; }
 
         /// <summary>
         /// Cancels the operation by going back to the previous page.
@@ -66,7 +68,7 @@ namespace MvvmPlayground.ViewModels
         /// <summary>
         /// Creates a new <see cref="CreateNewPersonViewModel"/> instance.
         /// </summary>
-        public CreateNewPersonViewModel() => CreateCommand = new CommandRelay<object>((obj) =>
+        public CreateNewPersonViewModel() => CreateCommand = new CommandRelay(() =>
         {
             // This is the work that will be done when called.
             IsOperationInProgress = true;

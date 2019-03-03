@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Capoala.MVVM", "Capoala.MVV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmPlayground", "MvvmPlayground\MvvmPlayground.csproj", "{7A77A85A-7409-44A2-AB55-F77425F028C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capoala Samples", "Capoala Samples\Capoala Samples.csproj", "{4FAEC046-12A6-41DA-9980-48093578D818}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7A77A85A-7409-44A2-AB55-F77425F028C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A77A85A-7409-44A2-AB55-F77425F028C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A77A85A-7409-44A2-AB55-F77425F028C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FAEC046-12A6-41DA-9980-48093578D818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FAEC046-12A6-41DA-9980-48093578D818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FAEC046-12A6-41DA-9980-48093578D818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FAEC046-12A6-41DA-9980-48093578D818}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,61 @@
+﻿<Window x:Class="Capoala_Samples.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Capoala_Samples.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="450" 
+        Width="800">
+
+    <Grid Margin="16">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="SampleViewModelSlim" FontSize="16"/>
+            <ContentPresenter Grid.Row="1" Margin="0">
+                <ContentPresenter.Content>
+                    <viewModels:SampleViewModelSlim/>
+                </ContentPresenter.Content>
+            </ContentPresenter>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="SampleViewModel" FontSize="16"/>
+            <ContentPresenter Grid.Row="1" Margin="0">
+                <ContentPresenter.Content>
+                    <viewModels:SampleViewModel/>
+                </ContentPresenter.Content>
+            </ContentPresenter>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="SampleViewModelAutoBackingStore" FontSize="16"/>
+            <ContentPresenter Grid.Row="1" Margin="0">
+                <ContentPresenter.Content>
+                    <viewModels:SampleViewModelAutoBackingStore/>
+                </ContentPresenter.Content>
+            </ContentPresenter>
+        </Grid>
+
+    </Grid>
+    
+</Window>
