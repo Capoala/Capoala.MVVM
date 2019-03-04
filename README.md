@@ -1,127 +1,221 @@
 # Capoala.MVVM
 `Capoala.MVVM` is a featherlight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.
 
-# INotifyPropertyChanged
-## NotifyingObjectBaseSlim
-The `NotifyingObjectBaseSlim` class is a slim, standard `INotifyPropertyChanged` implementation. A streamlined method named `SetAndNotify()` will set the referenced property's value and raise the `PropertyChanged` event in one swell swoop.
-```csharp
-public class ViewModel : Capoala.MVVM.NotifyingObjectBaseSlim
-{
-    string _name = null;
-    public string Name { get => _name; set => SetAndNotify(ref _name, value); }
-}
-```
-In cases where extra work or additional notifications are required, you can use standard getter setter syntax and utilize the `Notify()` method to raise the `PropertyChanged` event on the property being set.
-```csharp
-public class ViewModel : Capoala.MVVM.NotifyingObjectBaseSlim
-{
-    string _firstName = null;
-    public string FirstName
-    {
-        get => _firstName;
-        set
-        {
-            _firstName = value;
-            Notify();
-            Notify(nameof(FullName));
-        }
-    }
-
-    string _lastName = null;
-    public string LastName
-    {
-        get => _lastName;
-        set
-        {
-            if (SetAndNotify(ref _lastName, value))
-                Notify(nameof(FullName));
-        }
-    }
-
-    public string FullName => $"{FirstName} {LastName}";
-}
-```
-## NotifyingObjectBase
-The `NotifyingObjectBase` class is a more feature-rich implementation of the `INotifyPropertyChanged` interface. This class removes the requirement of a backing field and moves it into a backing store in the form of a `Dictionary<string, object>`. 
-
-This class also provides an attribute approach to streamlining property notification dependencies. In the below example, the property `FullName` subscribes to the `FirstName` and `LastName` event changes. When either `FirstName` or `LastName` is changed, `FullName` is also notified.
-```csharp
-public class ViewModel : Capoala.MVVM.NotifyingObjectBase
-{
-    public string FirstName { get => Get<string>(); set => Set(value); }
-    public string LastName { get => Get<string>(); set => Set(value); }
-
-    [NotifiedOnChange(nameof(FirstName), nameof(LastName))]
-    public string FullName => $"{FirstName} {LastName}";
-}
-```
-
 # ICommand
-## RelayCommand
-The `RelayCommand` implements the ICommand interface and comes in two flavors; `RelayCommand` and `RelayCommand<T>` for passing command paramters.
+## CommandRelay
+The `CommandRelay` implements the ICommand interface and comes in two flavors; `CommandRelay` and `CommandRelay<TExecutionParameter>` for passing a parameter to the execute method.
+
+#### Class ViewModel
+```csharp
+using Capoala.MVVM;
+using System.Diagnostics;
+
+internal class ViewModel
+{
+    public CommandRelay SaveCommand { get; } 
+        = new CommandRelay(() => Debug.WriteLine("Saving..."));
+
+    public CommandRelay<string> AddInputCommand { get; } 
+        = new CommandRelay<string>(input => Debug.WriteLine(input));
+}
+```
+#### XAML
+```xml
+...
+
+<!-- Bind to SaveCommand -->
+<Button Content="Save" 
+        Command="{Binding SaveCommand}"/>
+
+...
+
+<!-- Bind to AddInputCommand using a parameter -->
+<Button Content="Add" 
+        Command="{Binding AddInputCommand}", 
+        CommandParameter="{Binding ElementName=InputTextBox, Path=Text}"/>
+
+...
+```
+
+# INotifyPropertyChanged
+## INotifyPropertyChanges
+The `INotifyPropertyChanges` is a custom interface for implementing the `INotifyPropertyChanged` interface. The `INotifyPropertyChanges` interface exposes methods for implementing the `INotifyPropertyChanged` event and is defined - without summaries - as follows:
+
+```csharp
+public interface INotifyPropertyChanges : INotifyPropertyChanged
+{
+    void Notify([CallerMemberName] string propertyName = null);
+
+    bool SetAndNotify<T>(
+        ref T backingField, 
+        T value, 
+        EqualityComparer<T> equalityComparer = null, 
+        [CallerMemberName] string propertyName = null);
+}
+```
+## NotifyPropertyChangesBaseSlim
+`NotifyPropertyChangesBaseSlim` is an abstract class that simply implements the `INotifyPropertyChanges` interface.
+
+## NotifyPropertyChangesBase
+`NotifyPropertyChangesBase` is an abstract class that implements the `INotifyPropertyChanges` interface and supports the `SubscribeToChanges`, `NotifyOnChange`, and `CanExecuteDependentOn` attributes. These attributes allow a streamlined approach to notifying other properties and re-triggering the `NotifyCanExecuteDidChange` method on `CommandRelay` objects.
 
 ```csharp
 using Capoala.MVVM;
-using DW = System.Diagnostics.Debug;
+using System.Windows;
 
-public class ViewModel
+internal class SampleViewModel : NotifyPropertyChangesBase
 {
-    public RelayCommand SaveCommand { get; } 
-        = new RelayCommand(() => DW.WriteLine("Saving..."));
+    private bool _isOperationInProgress = false;
+    public bool IsOperationInProgress 
+    { 
+        get => _isOperationInProgress; 
+        set => SetAndNotify(ref _isOperationInProgress, value); 
+    }
 
-    public RelayCommand<string> GetRecordCommand { get; } 
-        = new RelayCommand<string>(entryName => DW.WriteLine(entryName));
+    private string _firstName;
+    public string FirstName 
+    { 
+        get => _firstName; 
+        set => SetAndNotify(ref _firstName, value); 
+    }
+
+    private string _lastName;
+    public string LastName 
+    { 
+        get => _lastName; 
+        set => SetAndNotify(ref _lastName, value); 
+    }
+
+    [SubscribeToChanges(nameof(FirstName), nameof(LastName))]
+    public string DisplayName => string.IsNullOrEmpty(LastName) && string.IsNullOrEmpty(FirstName)
+        ? null
+        : string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(FirstName)
+        ? $"{FirstName}"
+        : !string.IsNullOrEmpty(LastName) && string.IsNullOrEmpty(FirstName)
+        ? $"{LastName}"
+        : $"{LastName}, {FirstName}";
+
+    [CanExecuteDependentOn(nameof(FirstName), nameof(LastName), nameof(IsOperationInProgress))]
+    public CommandRelay CreateCommand { get; }
+
+    public SampleViewModel() => CreateCommand = new CommandRelay(() => 
+    {
+        // Do Something.
+
+    }, () => !IsOperationInProgress && 
+             !string.IsNullOrEmpty(FirstName) && 
+             !string.IsNullOrEmpty(LastName))
 }
 ```
-```xml
-...
-<Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition/>
-        <ColumnDefinition Width="Auto"/>
-    </Grid.ColumnDefinitions>
-    <TextBox x:Name="RecordID"/>
-    <Button Grid.Column="1" 
-            Margin="10 0 0 0" 
-            Command="{Binding GetRecordCommand}" 
-            CommandParameter="{Binding ElementName=RecordID, Path=Text}">Retreive</Button>
-</Grid>
-<Grid Grid.Row="1" Margin="0 20 0 0">
-    <!--Content-->
-</Grid>
-<Grid Grid.Row="2" Margin="0 20 0 0">
-    <Button HorizontalAlignment="Right" 
-            Command="{Binding SaveCommand}">Save</Button>
-</Grid>
-...
+
+## NotifyPropertyChangesBaseAutoBackingStore
+`NotifyPropertyChangesBaseAutoBackingStore` is an abstract class that inherits from `NotifyPropertyChangesBase`, but includes a "backing store" in the form of a `Dictionary<string, object>`. This allows us to not have to define private fields and is useful for testing and "notifying" models. Using the above sample, below is how the code would look using the `NotifyPropertyChangesBaseAutoBackingStore` base class.
+
+```csharp
+using Capoala.MVVM;
+using System.Windows;
+
+internal class SampleViewModel : NotifyPropertyChangesBaseAutoBackingStore
+{
+    public bool IsOperationInProgress { get => Get<bool>(); set => Set(value); 
+    public string FirstName { get => Get<string>(); set => Set(value); 
+    public string LastName { get => Get<string>(); set => Set(value); 
+
+    [SubscribeToChanges(nameof(FirstName), nameof(LastName))]
+    public string DisplayName => string.IsNullOrEmpty(LastName) && string.IsNullOrEmpty(FirstName)
+        ? null
+        : string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(FirstName)
+        ? $"{FirstName}"
+        : !string.IsNullOrEmpty(LastName) && string.IsNullOrEmpty(FirstName)
+        ? $"{LastName}"
+        : $"{LastName}, {FirstName}";
+
+    [CanExecuteDependentOn(nameof(FirstName), nameof(LastName), nameof(IsOperationInProgress))]
+    public CommandRelay CreateCommand { get; }
+
+    public SampleViewModel() => CreateCommand = new CommandRelay(() => 
+    {
+        // Do Something.
+
+    }, () => !IsOperationInProgress && 
+             !string.IsNullOrEmpty(FirstName) && 
+             !string.IsNullOrEmpty(LastName))    
+}
 ```
 
 # Navigation
-A simplistic navigation implementation is also available which should satisfy most requirements. The navigation system includes an `INavigationService<TNavigationItem>` interface, and a `NavigationServiceBase<TNavigationItem>` base class.
+## SimpleMvvmNavigator<TNavigationItem>
+The `SimpleMvvmNavigator<TNavigationItem>` class is a simplistic implementation for navigation. This class exposes only an event for subscribing to navigation changes and a method for performing the navigation itself. 
 
 ```csharp
-using Capoala.MVVM;
-
-public static class NavigationHelper
+internal static class Services
 {
-    public static INavigationService<object> Navigator { get; } 
-        = new DefaultNavigationService();
+    internal static SimpleMvvmNavigator<INotifyPropertyChanges> Navigator { get; } 
+        = new SimpleMvvmNavigator<INotifyPropertyChanges>();
 }
 
-public class ViewModel { }
-
-public class MainViewModel : NotifyingObjectBase
+internal class MainViewModel : NotifyPropertyChangesBaseAutoBackingStore
 {
-    public object CurrentViewModel { get => Get<object>(); set => Set(value); }
-
-    public MainViewModel()
-    {
-        NavigationHelper.Navigator.NavigationDidHappen += (s, e) =>
-        {
-            CurrentViewModel = NavigationHelper.Navigator.Current;
-        };
-
-        NavigationHelper.Navigator.Navigate(new ViewModel());
+    public INotifyPropertyChanges CurrentViewModel 
+    { 
+        get => Get<INotifyPropertyChanges>(); 
+        set => Set(value); 
     }
+
+    public MainViewModel() => 
+        Services.Navigator.NavigationDidHappen += (s, e) => 
+            CurrentViewModel = e.NavigationItem;
+}
+
+internal class TestViewModel : INotifyPropertyChanges
+{
+    public CommandRelay<INotifyPropertyChanges> Navigate { get; } 
+        = new CommandRelay<INotifyPropertyChanges>(
+            (viewModel) => Services.Navigator.NavigateTo(viewModel));
 }
 ```
+
+## MvvmNavigatorBase<TNavigationItem>
+`MvvmNavigatorBase<TNavigationItem>` is an abstract class for implementing a more robust, full featured navigation scheme. This class has default support for going both back and forward as well as additional properties to allow for modification on class inheritance.
+
+## MvvmNavigator
+`MvvmNavigator` is a default implementation of `MvvmNavigatorBase` and allows constructor settings for supporting back and forward navigation, which can yield a small performance benefit.
+
+```csharp
+internal static class Services
+{
+    internal static MvvmNavigator<INotifyPropertyChanges> Navigator { get; } 
+        = new MvvmNavigator<INotifyPropertyChanges>();
+
+    internal static MvvmNavigator<INotifyPropertyChanges> NoForwardNavigator { get; } 
+        = new MvvmNavigator<INotifyPropertyChanges>(supportsForwardNavigation: false);
+
+    internal static MvvmNavigator<INotifyPropertyChanges> NoBackNavigator { get; } 
+        = new MvvmNavigator<INotifyPropertyChanges>(supportsBackNavigation: false);
+
+    // This is essentially the same as "SimpleMvvmNavigator", but still exposes
+    // properties and methods for going back and forward, as we are still
+    // inheriting from the base class.     
+    internal static MvvmNavigator<INotifyPropertyChanges> NoBackNavigator { get; } 
+        = new MvvmNavigator<INotifyPropertyChanges>(
+            supportsBackNavigation: false, 
+            supportsForwardNavigation: false);
+}
+```
+
+## Attributes
+### SubscribeToChanges
+`SubscribeToChanges` is an attribute used to allow a property with this attribute to subscribe to value changes of other properties.
+
+### NotifyOnChange
+`NotifyOnChange` is an attribute used to allow a property with this attribute to notify other properties when its value changes.
+
+### CanExecuteDependentOn
+`CanExecuteDependentOn` is an attribute used to allow a property - of type `CommandRelay` or `CommandRelay<TExecutionParameter>` - to subscribe to value changes of other properties. This attribute differs from `SubscribeToChanges`, as `SubscribeToChanges` will raise the `PropertyChangedEventHandler` event of an `INotifyPropertyChanged` interface, while this attribute will raise the `CanExecuteChanged` event of an `ICommand` interface.
+
+## Events and Event Arguments
+### NavigationChangedEventHandler<TNavigationItem>
+`NavigationChangedEventHandler<TNavigationItem>` is a delegate for supporting navigation changes.
+
+### NavigationChangedEventArgs<TNavigationItem>
+The `NavigationChangedEventArgs<TNavigationItem>` class is used with the `NavigationChangedEventHandler<TNavigationItem>` event handler for navigation support.
