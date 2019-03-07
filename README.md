@@ -1,5 +1,5 @@
 # Capoala.MVVM
-`Capoala.MVVM` is a featherlight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.
+`Capoala.MVVM` is a minimalist framework for MVVM based applications. This framework provides both IPropertyChanged and ICommand implementations, as well as a simple navigation base.
 
 # ICommand
 ## CommandRelay
