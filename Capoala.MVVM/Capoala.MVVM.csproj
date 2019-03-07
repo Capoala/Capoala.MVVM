@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.2;netcoreapp2.1;net472;net471;net47</TargetFrameworks>
-    <Version>2019.0.0-beta.3</Version>
-    <Description>A featherweight MVVM framework designed for simple-to-moderate MVVM design pattern applications. This framework includes basic implementations for handling property notifications, command bindings, and navigation.</Description>
+    <Version>2019.0.0</Version>
+    <Description>A minimalist framework for MVVM based applications. This framework provides both IPropertyChanged and ICommand implementations, as well as a simple navigation base.</Description>
     <Copyright></Copyright>
     <PackageReleaseNotes>Release Notes 2019
 
@@ -30,7 +30,7 @@ of naming conflicts, undesirable - or lack of - functionality, and scalability.
 - The navigation service implementations now utilize a custom event handler NavigationChangedEventHandler with event argument NavigationChangedEventArgs.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Jonathan Nash</Authors>
-    <PackageTags>capoala nash mvvm ICommand command relay INotifyPropertyChanged</PackageTags>
+    <PackageTags>Capoala Nash MVVM ICommand INotifyPropertyChanged Navigation</PackageTags>
     <AssemblyVersion>2019.0.0.0</AssemblyVersion>
     <FileVersion>2019.0.0.0</FileVersion>
     <PackageProjectUrl>https://capoala.github.io/Capoala.MVVM/</PackageProjectUrl>
